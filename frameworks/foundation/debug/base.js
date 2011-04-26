@@ -9,6 +9,16 @@ var Simulo = {
     SC.RunLoop.end();
   },
 
+  pressEnter: function(selector) {
+    var pageElement = Simulo.PageElement.create({selector: selector});
+    SC.RunLoop.begin();
+    waits(1);
+    runs(function() {
+      pageElement.pressEnter();
+    });
+    SC.RunLoop.end();
+  },
+
   fillIn: function(selector, value) {
     var pageElement = Simulo.PageElement.create({selector: selector});
     SC.RunLoop.begin();

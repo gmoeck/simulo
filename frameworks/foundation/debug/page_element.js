@@ -25,5 +25,9 @@ Simulo.PageElement = SC.Object.extend({
   fillInWith: function(value) {
     if(value == undefined) throw new Error('ERROR: No value was given to fill in the element with');
     Simulo.KeyboardString.create({baseString: value, target: this.get('element')}).triggerEvents();
+  },
+
+  pressEnter: function() {
+    Simulo.KeyboardEvent.create({commandKey: 'enter', target: this.get('element')}).trigger();
   }
 });

@@ -17,8 +17,9 @@ Simulo.KeyDownEvent = Simulo.KeyEvent.extend({
   charCode: 0,
 
   keyCode: function() {
-    return this.get('keyCodes')[this.get('char').toLowerCase()];
-  }.property('char').cacheable(),
+    if(this.get('char')) return this.get('keyCodes')[this.get('char').toLowerCase()];
+    return this.get('keyCodes')[this.get('commandKey').toLowerCase()];
+  }.property('char', 'commandKey').cacheable(),
 
 
   trigger: function() {

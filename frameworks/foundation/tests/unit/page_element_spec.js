@@ -122,4 +122,26 @@ describe('Simulo.PageElement', function() {
       });
     });
   });
+
+  describe('#pressEnter', function() {
+    var createKeyboardEventSpy, keyboardEvent, keyboardEventSpy;
+    beforeEach(function() {
+      element = {};
+      pageElement = Simulo.PageElement.create({element: element});
+
+      keyboardEvent = {trigger: function() {}};
+      createKeyboardEventSpy = spyOn(Simulo.KeyboardEvent, 'create').andReturn(keyboardEvent);
+      keyboardEventSpy = spyOn(keyboardEvent, 'trigger');
+
+      pageElement.pressEnter();
+    });
+
+    it('creates a keyboard event for pressing the enter key', function() {
+      expect(createKeyboardEventSpy).toHaveBeenCalledWith({commandKey: 'enter', target: element});
+    });
+
+    it('tiggers the event it creates', function() {
+      expect(keyboardEventSpy).toHaveBeenCalled();
+    });
+  });
 });

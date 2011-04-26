@@ -6,9 +6,9 @@ Simulo.KeyboardEvent = SC.Object.extend({
   char: '',
 
   init: function() {
-    this.set('keyDownEvent', Simulo.KeyDownEvent.create({char: this.get('char'), target: this.get('target')}));
+    this.set('keyDownEvent', Simulo.KeyDownEvent.create({char: this.get('char'), target: this.get('target'), commandKey: this.get('commandKey')}));
     this.set('keyPressEvent', Simulo.KeyPressEvent.create({char: this.get('char'), target: this.get('target')}));
-    this.set('keyUpEvent', Simulo.KeyUpEvent.create({char: this.get('char'), target: this.get('target')}));
+    this.set('keyUpEvent', Simulo.KeyUpEvent.create({char: this.get('char'), target: this.get('target'), commandKey: this.get('commandKey')}));
   },
 
   trigger: function() {

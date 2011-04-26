@@ -38,11 +38,24 @@ describe('Simulo.KeyDownEvent', function() {
   });
 
   describe('#keyCode', function() {
-    it('is the evaluated key code', function() {
-      event = Simulo.KeyDownEvent.create({char: 'a'});
+    context('when a character key is given', function() {
+      beforeEach(function() {
+        event = Simulo.KeyDownEvent.create({char: 'a'});
+      });
 
-      expect(event.get('keyCode')).toBe(65);
+      it('is the evaluated character key code', function() {
+        expect(event.get('keyCode')).toBe(65);
+      });
+    });
 
+    context('when a command key is given', function() {
+      beforeEach(function() {
+        event = Simulo.KeyDownEvent.create({commandKey: 'enter'});
+      });
+
+      it('is the evaluated command key code', function() {
+        expect(event.get('keyCode')).toBe(13);
+      });
     });
   });
 });
