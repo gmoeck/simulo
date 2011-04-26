@@ -17,6 +17,11 @@ To setup fictum to work in your SproutCore project, we need to add the framework
     $ cd frameworks
     $ git clone git://github.com/gmoeck/simulo.git
 
+Once Simulo has been downloaded into your frameworks directory, you then need to update your project's Buildfile file. This can be done like so:
+
+config :all, :required => [:sproutcore, :simulo]
+
+
 ##Running Simulo's Unit Tests
 First you need to update your Buildfile to include sproutcore-jasmine.
 **Note**: When you go back to production, you need to recomment out
