@@ -23,6 +23,7 @@ Simulo.KeyPressEvent = Simulo.KeyEvent.extend({
   }.property('charCode').cacheable(),
 
   trigger: function() {
-    SC.Event.simulateEvent(this.get('target'), 'keypress', this.get('eventAttributes'));
+    var event = SC.Event.simulateEvent(this.get('target'), 'keypress', this.get('eventAttributes'));
+    SC.Event.trigger(this.get('target'), 'keypress', event);
   }
 });

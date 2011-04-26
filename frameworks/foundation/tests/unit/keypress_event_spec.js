@@ -2,7 +2,7 @@ describe('Simulo.KeyPressEvent', function() {
   var event;
 
   describe('#trigger', function() {
-    var simulateEventSpy, target, keyPressAttributes, char;
+    var simulateEventSpy, target, keyPressAttributes, char, simulatedEvent, triggerEventSpy;
 
     beforeEach(function() {
       char = 'a';
@@ -18,13 +18,20 @@ describe('Simulo.KeyPressEvent', function() {
       };
 
       event = Simulo.KeyPressEvent.create({char: char, target: target});
-      simulateEventSpy = spyOn(SC.Event, 'simulateEvent');
+      simulatedEvent = {};
+      simulateEventSpy = spyOn(SC.Event, 'simulateEvent').andReturn(simulatedEvent);
+      triggerEventSpy = spyOn(SC.Event, 'trigger');
       event.trigger();
     });
 
     it('generates a simulated event with the proper attributes', function() {
       expect(simulateEventSpy).toHaveBeenCalledWith(target, 'keypress', keyPressAttributes);
     });
+
+    it('triggers an event with the created simulated event', function() {
+      expect(triggerEventSpy).toHaveBeenCalledWith(target, 'keypress', simulatedEvent);
+    });
+
   });
 
   describe('#keyCode', function() {

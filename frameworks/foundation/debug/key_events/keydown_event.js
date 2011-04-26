@@ -23,6 +23,7 @@ Simulo.KeyDownEvent = Simulo.KeyEvent.extend({
 
 
   trigger: function() {
-    SC.Event.simulateEvent(this.get('target'), 'keydown', this.get('eventAttributes'));
+    var event = SC.Event.simulateEvent(this.get('target'), 'keydown', this.get('eventAttributes'));
+    SC.Event.trigger(this.get('target'), 'keydown', event);
   }
 });

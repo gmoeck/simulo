@@ -18,12 +18,18 @@ describe('Simulo.KeyUpEvent', function() {
       };
 
       event = Simulo.KeyUpEvent.create({char: char, target: target});
-      simulateEventSpy = spyOn(SC.Event, 'simulateEvent');
+      simulatedEvent = {};
+      simulateEventSpy = spyOn(SC.Event, 'simulateEvent').andReturn(simulatedEvent);
+      triggerEventSpy = spyOn(SC.Event, 'trigger');
       event.trigger();
     });
 
     it('generates a simulated event with the proper attributes', function() {
       expect(simulateEventSpy).toHaveBeenCalledWith(target, 'keyup', keyUpAttributes);
+    });
+
+    it('triggers an event with the created simulated event', function() {
+      expect(triggerEventSpy).toHaveBeenCalledWith(target, 'keyup', simulatedEvent);
     });
   });
 

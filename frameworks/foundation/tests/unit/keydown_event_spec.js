@@ -2,7 +2,7 @@ describe('Simulo.KeyDownEvent', function() {
   var event;
 
   describe('#trigger', function() {
-    var simulateEventSpy, target, keyDownAttributes, char;
+    var simulateEventSpy, target, keyDownAttributes, char, simulatedEvent, triggerEventSpy;
 
     beforeEach(function() {
       char = 'a';
@@ -18,12 +18,18 @@ describe('Simulo.KeyDownEvent', function() {
       };
 
       event = Simulo.KeyDownEvent.create({char: char, target: target});
-      simulateEventSpy = spyOn(SC.Event, 'simulateEvent');
+      simulatedEvent = {};
+      simulateEventSpy = spyOn(SC.Event, 'simulateEvent').andReturn(simulatedEvent);
+      triggerEventSpy = spyOn(SC.Event, 'trigger');
       event.trigger();
     });
 
     it('generates a simulated event with the proper attributes', function() {
       expect(simulateEventSpy).toHaveBeenCalledWith(target, 'keydown', keyDownAttributes);
+    });
+
+    it('triggers the created simulated event', function() {
+      expect(triggerEventSpy).toHaveBeenCalledWith(target, 'keydown', simulatedEvent);
     });
   });
 
