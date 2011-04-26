@@ -19,7 +19,7 @@ To setup fictum to work in your SproutCore project, we need to add the framework
 
 Once Simulo has been downloaded into your frameworks directory, you then need to update your project's Buildfile file. This can be done like so:
 
-config :all, :required => [:sproutcore, :simulo]
+    config :all, :required => [:sproutcore, :simulo]
 
 
 ##Running Simulo's Unit Tests
