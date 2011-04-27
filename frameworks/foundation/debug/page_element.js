@@ -20,14 +20,17 @@ Simulo.PageElement = SC.Object.extend({
     SC.Event.trigger(this.get('element'), 'mousedown');
     SC.Event.trigger(this.get('element'), 'focus');
     SC.Event.trigger(this.get('element'), 'mouseup');
+    return this;
   },
 
   fillInWith: function(value) {
     if(value == undefined) throw new Error('ERROR: No value was given to fill in the element with');
     Simulo.KeyboardString.create({baseString: value, target: this.get('element')}).triggerEvents();
+    return this;
   },
 
   pressEnter: function() {
     Simulo.KeyboardEvent.create({commandKey: 'enter', target: this.get('element')}).trigger();
+    return this;
   }
 });

@@ -7,6 +7,7 @@ var Simulo = {
       pageElement.click();
     });
     SC.RunLoop.end();
+    return pageElement;
   },
 
   pressEnter: function(selector) {
@@ -17,6 +18,7 @@ var Simulo = {
       pageElement.pressEnter();
     });
     SC.RunLoop.end();
+    return pageElement;
   },
 
   fillIn: function(selector, value) {
@@ -28,5 +30,7 @@ var Simulo = {
       pageElement.fillInWith(value);
     });
     SC.RunLoop.end();
+
+    return pageElement;
   }
 };

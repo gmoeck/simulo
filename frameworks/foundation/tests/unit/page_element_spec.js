@@ -59,14 +59,14 @@ describe('Simulo.PageElement', function() {
   });
 
   describe('#click', function() {
-    var triggerSpy, element;
+    var triggerSpy, element, returnValue;
     beforeEach(function() {
       element = {};
       pageElement = Simulo.PageElement.create({element: element});
       triggerSpy = spyOn(SC.Event, 'trigger');
 
       runs(function() {
-        pageElement.click();
+        returnValue = pageElement.click();
       });
     });
 
@@ -84,6 +84,10 @@ describe('Simulo.PageElement', function() {
 
     it('triggers a mouseup event on the element', function() {
       expect(triggerSpy).toHaveBeenCalledWith(element, 'mouseup');
+    });
+
+    it('allows chaining', function() {
+      expect(returnValue).toBe(pageElement);
     });
   });
 
@@ -103,14 +107,14 @@ describe('Simulo.PageElement', function() {
     });
 
     context('when a value is given', function() {
-      var createKeyboardStringSpy, value, keyboardString, keyboardStringSpy;
+      var createKeyboardStringSpy, value, keyboardString, keyboardStringSpy, returnValue;
       beforeEach(function() {
         keyboardString = {triggerEvents: function() {}};
         createKeyboardStringSpy = spyOn(Simulo.KeyboardString, 'create').andReturn(keyboardString);
         keyboardStringSpy = spyOn(keyboardString, 'triggerEvents');
         value = 'something';
 
-        pageElement.fillInWith(value);
+        returnValue = pageElement.fillInWith(value);
       });
 
       it('creates a keyboard string array', function() {
@@ -120,11 +124,15 @@ describe('Simulo.PageElement', function() {
       it('tiggers the events of the keyboard string array', function() {
         expect(keyboardStringSpy).toHaveBeenCalled();
       });
+
+      it('allows chaining', function() {
+        expect(returnValue).toBe(pageElement);
+      });
     });
   });
 
   describe('#pressEnter', function() {
-    var createKeyboardEventSpy, keyboardEvent, keyboardEventSpy;
+    var createKeyboardEventSpy, keyboardEvent, keyboardEventSpy, returnValue;
     beforeEach(function() {
       element = {};
       pageElement = Simulo.PageElement.create({element: element});
@@ -133,7 +141,7 @@ describe('Simulo.PageElement', function() {
       createKeyboardEventSpy = spyOn(Simulo.KeyboardEvent, 'create').andReturn(keyboardEvent);
       keyboardEventSpy = spyOn(keyboardEvent, 'trigger');
 
-      pageElement.pressEnter();
+      returnValue = pageElement.pressEnter();
     });
 
     it('creates a keyboard event for pressing the enter key', function() {
@@ -142,6 +150,10 @@ describe('Simulo.PageElement', function() {
 
     it('tiggers the event it creates', function() {
       expect(keyboardEventSpy).toHaveBeenCalled();
+    });
+
+    it('allows chaining', function() {
+      expect(returnValue).toBe(pageElement);
     });
   });
 });

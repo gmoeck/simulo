@@ -7,12 +7,12 @@ describe('Simulo', function() {
   });
 
   describe('.clickOn', function() {
-    var value, clickSpy;
+    var value, clickSpy, returnValue;
 
     beforeEach(function() {
       clickSpy = spyOn(pageElement, 'click');
 
-      Simulo.clickOn(selector);
+      returnValue = Simulo.clickOn(selector);
     });
 
     it('creates a page element', function() {
@@ -22,15 +22,19 @@ describe('Simulo', function() {
     it('tells the element to click on itself', function() {
       expect(clickSpy).toHaveBeenCalled();
     });
+
+    it('allows chaining events', function() {
+      expect(returnValue).toBe(pageElement);
+    });
   });
 
   describe('.pressEnter', function() {
-    var value, clickSpy;
+    var value, clickSpy, returnValue;
 
     beforeEach(function() {
       pressEnterSpy = spyOn(pageElement, 'pressEnter');
 
-      Simulo.pressEnter(selector);
+      returnValue = Simulo.pressEnter(selector);
     });
 
     it('creates a page element', function() {
@@ -41,17 +45,21 @@ describe('Simulo', function() {
       expect(pressEnterSpy).toHaveBeenCalled();
     });
 
+    it('allows chaining events', function() {
+      expect(returnValue).toBe(pageElement);
+    });
+
   });
 
   describe('.fillIn', function() {
-    var value, clickSpy, fillInWithSpy;
+    var value, clickSpy, fillInWithSpy, returnValue;
 
     beforeEach(function() {
       value = 'something';
       fillInWithSpy = spyOn(pageElement, 'fillInWith');
       clickSpy = spyOn(pageElement, 'click');
 
-      Simulo.fillIn(selector, value);
+      returnValue = Simulo.fillIn(selector, value);
     });
 
     it('creates a page element', function() {
@@ -64,6 +72,10 @@ describe('Simulo', function() {
 
     it('tells the element to fill in itself with the passed in value', function() {
       expect(fillInWithSpy).toHaveBeenCalledWith(value);
+    });
+
+    it('allows chaining events', function() {
+      expect(returnValue).toBe(pageElement);
     });
   });
 });
