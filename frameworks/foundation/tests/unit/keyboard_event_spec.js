@@ -15,7 +15,7 @@ describe('Simulo.KeyboardEvent', function() {
       spyOn(Simulo.KeyUpEvent, 'create').andReturn(keyUpEvent);
       triggerKeyUpEventSpy = spyOn(keyUpEvent, 'trigger');
 
-      target = {val: function() { console.log('inside'); return 'something'; }};
+      target = {val: function() { return 'something'; }};
       targetValueSpy = spyOn(target, 'val').andReturn('something');
 
       event = Simulo.KeyboardEvent.create({char: 'a', target: target});
