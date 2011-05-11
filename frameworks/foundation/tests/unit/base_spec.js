@@ -24,7 +24,7 @@ describe('Simulo', function() {
     });
 
     it('allows chaining events', function() {
-      expect(returnValue).toBe(pageElement);
+      expect(returnValue).toBe(Simulo);
     });
   });
 
@@ -33,21 +33,50 @@ describe('Simulo', function() {
 
     beforeEach(function() {
       pressEnterSpy = spyOn(pageElement, 'pressEnter');
-
-      returnValue = Simulo.pressEnter(selector);
     });
 
-    it('creates a page element', function() {
-      expect(createsPageElementSpy).toHaveBeenCalledWith({selector: selector});
+    context('when simulo is working in the context of a page element', function() {
+      beforeEach(function() {
+        Simulo._pageElement = pageElement;
+        returnValue = Simulo.pressEnter()
+      });
+      
+      afterEach(function() {
+        Simulo._pageElement = undefined;
+      });
+
+      it('does not create a pate element', function() {
+        expect(createsPageElementSpy).not.toHaveBeenCalled();
+      });
+
+      it('tells the element to press enter on itself', function() {
+        expect(pressEnterSpy).toHaveBeenCalled();
+      });
+
+      it('allows chaining events', function() {
+        expect(returnValue).toBe(Simulo);
+      });
     });
 
-    it('tells the element to press enter on itself', function() {
-      expect(pressEnterSpy).toHaveBeenCalled();
+    context('when simulo is working in the context of selecting a page element', function() {
+      beforeEach(function() {
+        returnValue = Simulo.pressEnter(selector)
+      });
+
+      it('creates a page element', function() {
+        expect(createsPageElementSpy).toHaveBeenCalledWith({selector: selector});
+      });
+
+      it('tells the element to press enter on itself', function() {
+        expect(pressEnterSpy).toHaveBeenCalled();
+      });
+
+      it('allows chaining events', function() {
+        expect(returnValue).toBe(Simulo);
+      });
     });
 
-    it('allows chaining events', function() {
-      expect(returnValue).toBe(pageElement);
-    });
+
 
   });
 
@@ -75,7 +104,7 @@ describe('Simulo', function() {
     });
 
     it('allows chaining events', function() {
-      expect(returnValue).toBe(pageElement);
+      expect(returnValue).toBe(Simulo);
     });
   });
 });
